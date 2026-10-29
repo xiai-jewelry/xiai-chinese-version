@@ -76,7 +76,7 @@ CATEGORIES = [
     dict(slug="necklaces", name="Necklaces", zh="项链", tile="/images/products/14174/14174-01.jpg",
          blurb="整串、单珠、长链与多层款式，涵盖海水与淡水珍珠。"),
     dict(slug="earrings", name="Earrings", zh="耳饰", tile="/images/products/33187/33187-01.jpg", head="/images/products/34115/34115-02.jpg",
-         blurb="耳钉、耳坠与耳圈，从精致的淡水小珠到大颗金珠与大溪地珍珠。"),
+         blurb="耳钉、耳坠与耳圈，衬托脸庞；从精致的淡水珍珠，到大颗金珠与大溪地珍珠。"),
     dict(slug="rings", name="Rings", zh="戒指", tile="/images/products/64048/64048-01.jpg",
          blurb="单珠、双珠与三珠戒指。每一款的戒围都会在下单前与你确认。"),
     dict(slug="bracelets", name="Bracelets", zh="手链手镯", tile="/images/products/52018/52018-01.jpg", head="/images/products/52018/52018-02.jpg",
@@ -121,7 +121,7 @@ SLIDES = [
          alt="奶油色缎面上的珍珠项链、珍珠手链与一枚金珠戒指"),
     dict(img="/images/home/slide-2-golden-earrings.jpg", tone="light", pos="right", narrow=True,
          alt="石材上的一对金珠耳饰，上方为镶石菱形耳托",
-         title="金珠", text="从浅香槟色、奶油金，到浓郁的金色。",
+         title="金珠", text="从浅香槟色、奶油色，到浓郁的金色。",
          cta=("了解更多", "金珠", "/pearl-guide#golden")),
     dict(img="/images/home/slide-3-purple-earrings.jpg", tone="dark", pos="right", narrow=True,
          alt="深色大理石上的一对紫色珍珠耳饰，上方为闪耀的花簇耳托",
@@ -143,7 +143,7 @@ TRY_ON = [
          alt="身穿灰色针织衫和阔腿裤、佩戴深色长款珍珠项链的女性"),
     dict(img="/images/home/worn-cluster-earrings.jpg", ai=True, cap="灰色珍珠花簇耳钉。",
          alt="灰色珍珠花簇耳钉特写"),
-    dict(campaign="hero", alt="模特佩戴玺爱奶油金珠耳饰"),
+    dict(campaign="hero", alt="模特佩戴玺爱奶油金珠耳坠"),
     dict(campaign="mixed", alt="身穿白衬衫、佩戴多彩海水珍珠项链的模特"),
     dict(campaign="ring", alt="搭在驼色大衣上、佩戴金珠戒指的手"),
     dict(img="/images/home/showroom-14157.jpg", ai=False, sku="14157", pos="50% 45%",
@@ -337,7 +337,7 @@ def write(rel, text):
 
 # ------------------------------------------------------------- pages ------
 SLOGAN = """<h1>因为玺爱，<br>所以喜爱</h1>
-          <p class="sub">金珠、澳白与大溪地珍珠，在山下湖源头精挑细选，镶嵌于金与银之间。</p>
+          <p class="sub">金珠、澳白与大溪地珍珠，在山下湖源头精挑细选，以金、银镶嵌。</p>
           <div class="btns"><a class="btn fill" href="/products">探索全部珠宝</a></div>"""
 
 
@@ -530,7 +530,7 @@ def home():
     <div><h3>证书</h3><p>购买前，我们会确认这件作品附带哪种证书，以及适用的售后条款。</p><a class="ul" href="/contact#faq">常见问题</a></div>
   </div>
 </section>"""
-    return (head("玺爱珠宝 XIAI JEWELRY · 山下湖金珠、大溪地与南洋珍珠首饰",
+    return (head("玺爱珠宝 XIAI JEWELRY · 山下湖金珠、澳白与大溪地珍珠首饰",
                  "来自诸暨山下湖的珍珠首饰：金珠、澳白、大溪地、Akoya与淡水珍珠项链、耳饰、戒指、手链手镯与胸针。欢迎各地咨询。",
                  "/", og, ld, preload=SLIDES[0]["img"] if SLIDES else "") + header("home") + body + footer())
 
@@ -544,7 +544,7 @@ def listing(cat=None):
     if cat:
         key = CAT_HEAD_CAMPAIGN.get(cat["name"])
         if key in CAMPAIGN:
-            img, alt, note = CAMPAIGN[key]["src"], f"玺爱{cat['zh']}，上身效果", wearing(key)
+            img, alt, note = CAMPAIGN[key]["src"], f"模特佩戴玺爱{cat['zh']}", wearing(key)
         else:
             img, alt, note = cat.get("head", cat["tile"]), f"玺爱{cat['zh']}", ""
         w, h = size(img)
@@ -596,7 +596,7 @@ def product(p):
         worn = f"""<section class="sec tight" aria-labelledby="worn-h">
   <div class="wrap worn">
     <img src="{WORN[sku]['src']}" alt="模特佩戴{e(name)}" width="{size(WORN[sku]['src'])[0]}" height="{size(WORN[sku]['src'])[1]}" loading="lazy"{f' style="object-position:{WORN[sku]["pos"]}"' if WORN[sku].get("pos") else ""}>
-    <div><h2 id="worn-h">上身效果</h2><p>{e(p['for'])}</p><p class="ai">AI生成图片，依据本款实物照片制作；上方照片为实物拍摄。</p></div>
+    <div><h2 id="worn-h">人物试戴</h2><p>{e(p['for'])}</p><p class="ai">AI生成图片，依据本款实物照片制作；上方照片为实物拍摄。</p></div>
   </div>
 </section>"""
     pearl_links = "、".join(f'<a href="/pearl-guide#{k}">{PEARLS[k]["name"]}</a>' for k in p["pearls"])
@@ -697,7 +697,7 @@ def guide():
       <p class="body-text" style="margin-top:18px">马贝珍珠贴着贝壳内壁养殖而成，呈半球形、背面平整。巴洛克珍珠形状不规则，每一颗都不一样。</p>
       <p class="body-text" style="margin-top:16px">我们的巴洛克作品是<a href="/products/14103">大溪地巴洛克项链</a>。图中这类马贝珍珠作品（如鸡尾酒戒指），请向我们咨询目前的库存。</p>
       <div class="btns" style="margin-top:28px"><a class="btn" href="/contact">咨询马贝珍珠作品</a></div></div>
-    <figure><img src="/images/sig-mabe-ring.jpg" alt="镶密钉光环的马贝珍珠鸡尾酒戒指" width="1200" height="1200" loading="lazy"><figcaption class="note" style="margin-top:10px">马贝珍珠鸡尾酒戒指，摄于展厅。</figcaption></figure>
+    <figure><img src="/images/sig-mabe-ring.jpg" alt="外圈密镶的马贝珍珠鸡尾酒戒指" width="1200" height="1200" loading="lazy"><figcaption class="note" style="margin-top:10px">马贝珍珠鸡尾酒戒指，摄于展厅。</figcaption></figure>
   </div>
 </section>"""
     body = f"""<div class="wrap">
@@ -710,7 +710,7 @@ def guide():
 </div>
 {''.join(secs)}
 {mabe}"""
-    return head(f"珍珠指南：金珠、南洋珠、大溪地、Akoya与淡水珍珠 · {BRAND}",
+    return head(f"珍珠指南：金珠、澳白、大溪地、Akoya与淡水珍珠 · {BRAND}",
                 "金珠、澳白、大溪地、Akoya、淡水、马贝与巴洛克珍珠有什么不同，以及玺爱用它们做成的作品。",
                 "/pearl-guide", "/images/pearl-types.jpg") + header("guide") + body + footer()
 
@@ -718,7 +718,7 @@ def guide():
 MILESTONES = [("1976", "家族开始从事珍珠行业。"), ("1979", "第一批珍珠推向市场。"),
               ("1999", "第二代接手家族生意。"), ("2008", "入驻华东国际珠宝城。"),
               ("2010", "注册“玺爱”品牌。"), ("2012", "开始电商销售。"),
-              ("2020", "转向直播电商。"), ("2021–22", "拓展主播合作，入驻抖音与微信视频号。"),
+              ("2020", "转向直播电商。"), ("2021–2022", "拓展主播合作，入驻抖音与微信视频号。"),
               ("2023至今", "完善供应链与合作服务。")]
 
 
@@ -726,7 +726,7 @@ def story():
     tl = "".join(f"<li><b>{y}</b><span>{e(t)}</span></li>" for y, t in MILESTONES)
     body = f"""<div class="wrap">
   {crumbs(('品牌故事', None))}
-  <div class="page-head"><h1>自1976年，一家人与珍珠为伴</h1><p class="sub">玺爱位于中国珍珠之乡——浙江诸暨山下湖镇。</p></div>
+  <div class="page-head"><h1>自1976年起，一家人与珍珠为伴</h1><p class="sub">玺爱位于中国珍珠之乡——浙江诸暨山下湖镇。</p></div>
   <img class="wide-img" src="/images/farm-lake.jpg" alt="诸暨附近湖面上的珍珠养殖场" width="1800" height="1200" fetchpriority="high">
 </div>
 <section class="sec" aria-labelledby="who-h">
@@ -734,7 +734,7 @@ def story():
     <h2 id="who-h" class="lede">依托当地的珍珠资源，我们选珠、开发设计、制作并销售珍珠首饰。</h2>
     <div class="body-text">
       <p>我们的展厅、网店与一对一顾问服务面向各类客户；选品、制作、质检、包装、发货与售后团队在每一笔订单背后协同工作。</p>
-      <p>除零售客户外，我们也为销售渠道供货，并与直播主播及定制项目合作。</p>
+      <p>除零售客户外，我们也为销售渠道供货，并与直播主播合作、承接定制项目。</p>
     </div>
   </div>
 </section>
@@ -746,7 +746,7 @@ def story():
 </section>
 <section class="sec" aria-labelledby="src-h">
   <div class="wrap">
-    <div class="head"><h2 id="src-h">靠近珍珠旅程的每一步</h2><p>立足山下湖珍珠产业带，让我们紧邻养殖、采收、分级与原珠供应。</p></div>
+    <div class="head"><h2 id="src-h">贴近珍珠的每一个环节</h2><p>立足山下湖珍珠产业带，我们紧邻养殖、采收、分级与原珠供应。</p></div>
     <ol class="steps">
       <li><img src="/images/farm-lake.jpg" alt="" width="1800" height="1200" loading="lazy"><h3>养殖</h3><p>珍珠在诸暨周边湖泊与池塘的河蚌中生长。</p></li>
       <li><img src="/images/opening-mussels.jpg" alt="" width="1200" height="800" loading="lazy"><h3>采收</h3><p>手工开蚌，取出珍珠。</p></li>
@@ -825,7 +825,7 @@ def wholesale():
 </section>
 <section class="sec" aria-labelledby="how-h">
   <div class="wrap">
-    <div class="head"><h2 id="how-h">合作流程</h2></div>
+    <div class="head"><h2 id="how-h">购买与合作流程</h2></div>
     <div class="paths">
       <div><h3>为自己购买</h3><ol><li>浏览我们的珠宝</li><li>咨询款式与规格</li><li>确认价格与购买方式</li><li>下单后，我们安排发货</li><li>有任何售后问题，随时联系我们</li></ol></div>
       <div><h3>定制与合作</h3><ol><li>告诉我们你的需求</li><li>确认选珠与设计</li><li>确认样品或产品</li><li>交付</li></ol></div>
@@ -837,7 +837,7 @@ def wholesale():
     <div><h2 id="teams-h" style="font-size:clamp(24px,2.4vw,34px)">五个团队，服务每一笔订单</h2><p class="body-text" style="margin-top:16px">从选款到交付，每一个需求都有专门的团队跟进。</p>
       <img src="/images/packing.jpg" alt="在仓库里检查并打包订单" width="900" height="1125" loading="lazy" style="margin-top:36px;max-width:420px;width:100%"></div>
     <ul class="teams">
-      <li><b>选品团队</b><span>款式、库存与产品信息</span></li>
+      <li><b>产品与选品</b><span>款式、库存与产品信息</span></li>
       <li><b>运营与内容</b><span>渠道运营、内容策划与素材</span></li>
       <li><b>拍摄与直播</b><span>产品拍摄、直播场景与现场支持</span></li>
       <li><b>客服与订单</b><span>咨询、订单细节与进度更新</span></li>
@@ -847,7 +847,7 @@ def wholesale():
 </section>
 <section class="sec" aria-labelledby="src2-h">
   <div class="wrap">
-    <div class="head"><h2 id="src2-h">靠近源头</h2><p>立足山下湖珍珠产业带，让我们紧邻养殖、采收、分级与原珠供应。</p><div class="btns"><a class="btn" href="/our-story">品牌故事</a><a class="btn" href="/products">查看作品</a></div></div>
+    <div class="head"><h2 id="src2-h">靠近源头</h2><p>立足山下湖珍珠产业带，我们紧邻养殖、采收、分级与原珠供应。</p><div class="btns"><a class="btn" href="/our-story">品牌故事</a><a class="btn" href="/products">查看作品</a></div></div>
     <div class="gallery">
       <figure><img src="/images/sorting.jpg" alt="团队手工分拣珍珠" width="1200" height="800" loading="lazy"><figcaption>分级与分拣</figcaption></figure>
       <figure><img src="/images/drilling.jpg" alt="精密机器为珍珠打孔" width="1200" height="800" loading="lazy"><figcaption>打孔</figcaption></figure>
@@ -862,7 +862,7 @@ def wholesale():
 
 FAQ = [("玺爱卖什么？", "珍珠项链、耳饰、戒指、手链手镯、吊坠与胸针。"),
        ("你们只卖淡水珍珠吗？", "不是。我们以海水珍珠为主——南洋金珠、澳白、大溪地、Akoya与马贝珍珠——也提供高品质淡水珍珠、爱迪生珍珠与巴洛克珍珠。"),
-       ("所有款式都是18K金吗？", "视款式而定，每件作品的材质都写在它的产品介绍里。"),
+       ("所有首饰都是18K金镶嵌的吗？", "视款式而定，每件作品的材质都写在它的产品介绍里。"),
        ("挑选珍珠首饰时要看什么？", "款式、珍珠种类、表面品质、尺寸、镶嵌金属、实物照片和价格。任何款式我们都可以提供更多照片或视频。"),
        ("可以定制或批发吗？", "可以。告诉我们你的需求，费用与交期逐单确认。"),
        ("证书和售后怎么处理？", "购买前，我们会确认这件作品附带哪种证书，以及适用的售后条款。"),
@@ -880,7 +880,7 @@ def contact():
   <div class="page-head"><h1>欢迎来山下湖，或直接联系我们</h1><p class="sub">咨询任意款式、预约参观展厅，或洽谈批发、定制设计与直播合作。</p></div>
   <div class="contact-grid" style="padding-bottom:112px">
     <div>
-      <p class="asking" id="asking" data-names="{e(names)}">你正在咨询 <b></b>。致电或发消息时，请告知这个货号。</p>
+      <p class="asking" id="asking" data-names="{e(names)}">你正在咨询<b></b>。致电或发消息时，请告知这个货号。</p>
       <dl class="contact-list">
         <dt>联系人</dt><dd>陈先生（玺爱哥）</dd>
         <dt>电话</dt><dd><a href="tel:{TEL}">{PHONE}</a></dd>
